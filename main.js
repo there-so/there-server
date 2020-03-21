@@ -142,11 +142,11 @@ app.use('/rest', restApi)
 app.use('/analytics', analyticsHandler) // Deprecated
 app.get('/download/macos', (req, res) => {
   // Desktop app download link
-  getLatestReleaseDlLink()
+  return getLatestReleaseDlLink()
     .then(link => res.redirect(link))
     .catch(err => {
-      res.status(404).send(err.message)
       Raven.captureException(err)
+      return res.status(404).send(err.message)
     })
 
   // Track downloads
