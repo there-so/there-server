@@ -40,7 +40,9 @@ const pe = new PrettyError()
 pe.start()
 
 // Sentry
-Raven.config(process.env.SENTRY_DSN).install()
+Raven.config(
+  'https://43fff0dd460f4f7e82f3e88e974cbea0:e098629c5af44ce1adda8538ac363e2d@sentry.io/1251903',
+).install()
 app.use(Raven.requestHandler()) // Must be the first middleware
 
 // Setting various HTTP headers for security
