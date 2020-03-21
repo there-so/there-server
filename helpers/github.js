@@ -7,7 +7,7 @@ const { GH_TOKEN_RELEASES } = process.env
 
 // Cache
 const latestReleaseAssetsKey = 'github-latest-release'
-const cache = Lru({
+const cache = new Lru({
   max: 10,
   maxAge: ms('5m'),
 })
