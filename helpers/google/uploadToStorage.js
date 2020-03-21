@@ -6,7 +6,8 @@ import fs from 'fs'
 
 const gcs = new Storage({
   projectId: 'there-192619',
-  keyFilename: path.join(__dirname, '../../secrets/There-552ddaf22779.json'),
+  // CHANGED THIS PASS FROM ../../secrets/
+  keyFilename: path.join(__dirname, '../../There-552ddaf22779.json'),
 })
 
 const isProd = process.env.NODE_ENV === 'production'
