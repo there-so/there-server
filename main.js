@@ -141,6 +141,9 @@ app.get('/playground', playgroundExpress({ endpoint: '/graphql' }))
 app.use('/rest', restApi)
 app.use('/analytics', analyticsHandler) // Deprecated
 app.get('/download/macos', (req, res) => {
+  // Track downloads
+  mixpanel.track('Download macOS', { ip: req.ip })
+
   // Desktop app download link
   return getLatestReleaseDlLink()
     .then(link => res.redirect(link))
@@ -148,9 +151,6 @@ app.get('/download/macos', (req, res) => {
       Raven.captureException(err)
       return res.status(404).send(err.message)
     })
-
-  // Track downloads
-  mixpanel.track('Download macOS', { ip: req.ip })
 })
 
 // API Welcome message for strangers!

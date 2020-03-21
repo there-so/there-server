@@ -15,16 +15,20 @@ const cache = new Lru({
 export const getLatestReleaseDlLink = async () => {
   const cachedAssets = cache.get(latestReleaseAssetsKey)
 
+  console.log(cachedAssets)
   let assets
   if (!cachedAssets) {
     debug('Fetching latest release...')
 
     // We should fetch for the first time
     const response = await fetch(
-      'https://api.github.com/repos/therepm/there-desktop/releases/latest',
-      { headers: { Authorization: `token ${GH_TOKEN_RELEASES}` } },
+      'https://api.github.com/repos/therehq/there-desktop/releases/latest',
+      // { headers: { Authorization: `token ${GH_TOKEN_RELEASES}` } },
     )
-    ;({ assets } = await response.json())
+    console.log(response)
+    const json = await response.json()
+    console.log(json)
+    assets = json.assets
     cache.set(latestReleaseAssetsKey, assets)
   } else {
     debug('Using cached latest release assets')
