@@ -156,7 +156,7 @@ app.get('/download/macos', (req, res) => {
 // API Welcome message for strangers!
 app.get('/', (req, res) => {
   res.send(
-    `There™ API v${version} With ☘️ &nbsp;Graphcool Projects And 👻 &nbsp;Apollo Powered by ▲ ZEIT Now`,
+    `There™ API v${version} With ☘️ &nbsp;Graphcool Projects And 👻 &nbsp;Apollo Powered by ▲ ZEIT and Render.com`,
   )
 })
 

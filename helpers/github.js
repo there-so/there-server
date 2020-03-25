@@ -25,9 +25,7 @@ export const getLatestReleaseDlLink = async () => {
       'https://api.github.com/repos/therehq/there-desktop/releases/latest',
       // { headers: { Authorization: `token ${GH_TOKEN_RELEASES}` } },
     )
-    console.log(response)
     const json = await response.json()
-    console.log(json)
     assets = json.assets
     cache.set(latestReleaseAssetsKey, assets)
   } else {
