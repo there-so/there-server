@@ -103,6 +103,9 @@ app.use(
       user: await getUser(req.userId),
       models,
     },
+    // resolverValidationOptions: {
+    //   requireResolversForResolveType: false,
+    // },
     formatError: error => {
       if (error.path || error.name !== 'GraphQLError') {
         console.error(error)
