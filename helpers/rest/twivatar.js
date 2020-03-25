@@ -27,6 +27,7 @@ export default async (req, res, next) => {
     imageUrl = await get(req.params.user)
   } catch (error) {
     console.warn(error)
+    return res.status(404).send('')
   }
 
   debug(`Fetching Twitter avatar for ${req.params.user}...`)
@@ -37,6 +38,10 @@ export default async (req, res, next) => {
 
   res.setHeader('Cache-Control', `public, max-age=${oneMonthInSec}`)
 
-  const stream = await bent()(imageUrl)
-  stream.pipe(res)
+  try {
+    const stream = await bent()(imageUrl)
+    stream.pipe(res)
+  } catch (error) {
+    return res.status(404).send('')
+  }
 }
