@@ -7,6 +7,8 @@ import Raven from 'raven'
 
 const { JWT_SECRET } = process.env
 
+console.info("JWT_SECRET", JWT_SECRET[0], JWT_SECRET[3]);
+
 export const jwtStrategy = new JwtStrategy(
   {
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -31,6 +33,7 @@ export const parseUserIdIfAuthorized = (req, res, next) => {
     !authorization.includes('Bearer') ||
     authorization.toLowerCase().includes('null')
   ) {
+    console.log('no header');
     next()
     return
   }
@@ -41,6 +44,7 @@ export const parseUserIdIfAuthorized = (req, res, next) => {
     if (token.split('.').length !== 3) {
       // Token is invalid
       // https://stackoverflow.com/a/38712298/4726475
+      console.log('invalid token');
       next()
     }
 
@@ -50,6 +54,7 @@ export const parseUserIdIfAuthorized = (req, res, next) => {
       req.userId = payload.userId
     }
   } catch (err) {
+    console.error("jwt", err);
     Raven.captureException(err)
   } finally {
     next()
