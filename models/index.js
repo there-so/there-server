@@ -152,6 +152,27 @@ export const AnalyticsEvent = sequelize.define(
   { charset: 'utf8mb4' },
 )
 
+// export const Timezone = sequelize.define(
+//   'timezone',
+//   {
+//     id: {
+//       type: DataTypes.INTEGER,
+//       autoIncrement: true,
+//       primaryKey: true,
+//     },
+//     country: Sequelize.STRING,
+//     name: Sequelize.STRING,
+//     lat: Sequelize.STRING,
+//     lng: Sequelize.STRING,
+//     countryName: Sequelize.STRING,
+//     regionName: Sequelize.STRING,
+//     abbreviation: Sequelize.STRING,
+//     updatedAt: Sequelize.STRING,
+//     skipped: Sequelize.BOOLEAN,
+//   },
+//   { charset: 'utf8mb4' },
+// )
+
 // Set associations
 User.belongsToMany(User, { as: 'following', through: 'userFollowings' })
 User.belongsToMany(User, { as: 'pinnedUsers', through: 'userPinneds' })
