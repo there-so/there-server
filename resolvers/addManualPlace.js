@@ -1,7 +1,7 @@
 import { ManualPlace } from '../models'
 import getTzAndLoc from '../helpers/google/getTzAndLoc'
 import followingList from './followingList'
-import axios from 'axios'
+import { getPlaceData } from '../utils/getPlaceData'
 
 export default async (obj, args, ctx, info) => {
   const {
@@ -50,19 +50,4 @@ export default async (obj, args, ctx, info) => {
   }
 
   return savedPlace.get({ plain: true })
-}
-
-const getPlaceData = async (place_id) => {
-  try {
-    const url = `https://therepm-server-v2.fly.dev/getPlaceData?place_id=${place_id}`
-    const res = await axios.get(url)
-    const zoneData = res.data
-    if (zoneData.ok === true) {
-      return zoneData
-    } else {
-      return undefined
-    }
-  } catch (error) {
-    return undefined
-  }
 }

@@ -3,6 +3,7 @@ import Raven from 'raven'
 import { ManualPerson } from '../models'
 import getTzAndLoc from '../helpers/google/getTzAndLoc'
 import followingList from './followingList'
+import { getPlaceData } from '../utils/getPlaceData'
 
 export default async (
   obj,
@@ -19,7 +20,15 @@ export default async (
   info,
 ) => {
   // Find timezone and exact location based on placeId
-  let { city, fullLocation, timezone } = await getTzAndLoc(placeId)
+  // let { city, fullLocation, timezone } = await getTzAndLoc(placeId)
+  let placeData = await getPlaceData(placeId)
+  if (!placeData) {
+    Raven.captureException(err)
+    console.log(err)
+    return 'error adding'
+  }
+
+  let { city, fullLocation, timezone } = placeData
 
   // For UTC
   if (!placeId && !city && inputTimezone) {
