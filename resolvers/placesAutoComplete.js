@@ -34,8 +34,8 @@ export default async (obj, args, ctx) => {
 
 const placesAutoComplete = async (city) => {
   try {
-    // https://therepm-server-v2.fly.dev/placesAutoComplete?city=Kabul
-    const url = `https://therepm-server-v2.fly.dev/placesAutoComplete?city=${city}`
+    // https://there-time.usenoor.com/placesAutoComplete?city=Kabul
+    const url = `https://there-time.usenoor.com/placesAutoComplete?city=${city}`
     const res = await axios.get(url)
     const zoneData = res.data
     if (zoneData.ok === true) {
